@@ -3,14 +3,12 @@
 const {DataTypes} = require('sequelize');
 const pgLib = require('../lib/pg.lib');
 
-const transfers = pgLib.connect().define('transfers', {
-    sender: {
-        type: DataTypes.STRING, allowNull: false,
-    }, receiver: {
-        type: DataTypes.STRING, allowNull: false
-    }, address: {
-        type: DataTypes.STRING, allowNull: false
-    }, amount: {
+const pools = pgLib.connect().define('pools', {
+    address: {
+        type: DataTypes.STRING, allowNull: false, primaryKey: true
+    }, labels: {
+        type: DataTypes.ARRAY, allowNull: false
+    }, initialFunder: {
         type: DataTypes.STRING, allowNull: false
     },
 
@@ -26,4 +24,4 @@ const transfers = pgLib.connect().define('transfers', {
     timestamps: false
 });
 
-module.exports = transfers;
+module.exports = pools;
